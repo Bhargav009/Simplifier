@@ -5,11 +5,15 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+
+  isSignUp: boolean = true;
 
   constructor() { }
 
-  ngOnInit() {
+  toggleSignUp(param) {
+    this.isSignUp = param;
+    console.log(this.isSignUp);
   }
 
 }

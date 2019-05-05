@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
 .navbar-color {
     background-color: #5460CF;
 }
-.body {
-    padding:20px;
+.container {
+    margin-top: 100px;
 }
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+    font-size: 25px;
+}
+
+
