@@ -95,8 +95,9 @@ input {
     position: relative;
     overflow: hidden;
     width: 768px;
+    margin-top: 70px;
     max-width: 100%;
-    min-height: 650px;
+    min-height: 550px;
 }
 
 .form-container {
@@ -216,6 +217,10 @@ input {
 
 .social-container {
     margin: 20px 0;
+}
+
+.social:active {
+    transform: scale(0.95);
 }
 
 .social-container a {
