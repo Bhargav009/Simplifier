@@ -17,6 +17,7 @@ import { AllFormsComponent } from './all-forms/all-forms.component';
 import { SimplyChartComponent } from './simply-chart/simply-chart.component';
 import { SimplyFormBuilderComponent } from './simply-form-builder/simply-form-builder.component';
 import { environment } from 'src/environments/environment';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { environment } from 'src/environments/environment';
     SimplyFormComponent,
     AllFormsComponent,
     SimplyChartComponent,
-    SimplyFormBuilderComponent
+    SimplyFormBuilderComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { environment } from 'src/environments/environment';
     SocialLoginModule,
     FormioModule,
     FormsModule,
-    AngularFireDatabaseModule,  
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([
       {
@@ -44,7 +46,19 @@ import { environment } from 'src/environments/environment';
         path: 'builder', component: SimplyFormBuilderComponent
       },
       {
+        path: 'all', component: AllFormsComponent
+      },
+      {
         path: 'form', component: SimplyFormComponent
+      },
+      {
+        path: 'form/:key', component: SimplyFormComponent
+      },
+      {
+        path: 'details', component: DetailsComponent
+      },
+      {
+        path: 'details/:key', component: DetailsComponent
       }
     ])
   ],

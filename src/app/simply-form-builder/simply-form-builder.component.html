@@ -4,26 +4,6 @@
   <div class="builder">
     <form-builder [form]="form" #json class="null"></form-builder>
   </div>
-  <button class="btn btn-danger m-2 px-4 pull-right" (click)="Delete()">Delete</button>
-  <button class="btn btn-success m-2 px-4 pull-right" [disabled]="!nameInput.value" (click)="Save()">Save</button>
+  <button class="btn btn-danger m-2 px-4 pull-right" (click)="reset()">Reset</button>
+  <button class="btn btn-success m-2 px-4 pull-right" [disabled]="!nameInput.value" (click)="save()">Save</button>
 </div>
-
-
-
-<!-- <div class="row simplyContainer px-5">
-  <div class="col-md-12">
-    <h5>Form Name:</h5>
-    <input type="text" name="name" class="form-control mb-2" placeholder="Enter form name...">
-  </div>
-</div>
-<div class="row px-5">
-  <div class="col-md-10 p-3">
-    <form-builder [form]="form" #json></form-builder>
-  </div>
-</div>
-<div class="row px-5">
-  <div class="col-md-12">
-    <button class="btn btn-danger m-2 px-4 pull-right" (click)="Delete()">Delete</button>
-    <button class="btn btn-success m-2 px-4 pull-right" (click)="Save()">Save</button>
-  </div>
-</div> -->

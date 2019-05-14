@@ -1,6 +1,7 @@
 import { FormService } from './../services/form.service';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilderComponent } from 'angular-formio';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,9 @@ import { FormBuilderComponent } from 'angular-formio';
 })
 export class SimplyFormBuilderComponent {
 
-  constructor(private formService: FormService) { }
+  constructor(
+    private formService: FormService,
+    private router: Router) { }
 
   @ViewChild('json') json: FormBuilderComponent;
 
@@ -23,17 +26,17 @@ export class SimplyFormBuilderComponent {
     console.log(this.json);
   }
 
-  Save() {
-    //need to store in DB
-    let formSchema = JSON.stringify(this.json.form).replace(/\"/g, "'");
-    console.log(formSchema);
-    console.log(this.formName);
+  save() {
+    let formSchema = this.json.form;
     if (!this.formName || !formSchema)
       return;
     this.formService.save(formSchema, this.formName);
+    this.router.navigateByUrl('/all');
   }
 
-  Delete() {
-    console.log("Deleted");
+  reset() {
+    this.formName = "";
+    this.form = { components: [] };
+    console.log("Reseted");
   }
 }

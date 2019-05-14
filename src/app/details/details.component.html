@@ -1,0 +1,21 @@
+<!-- <div class="container">
+  <ul *ngFor="let item of details | keyvalue" class="list-group">
+    <li class="list-group-item">{{item.key}} {{item | json}}</li>
+  </ul>
+</div> -->
+
+<table class="container table">
+  <thead>
+    <tr>
+      <th *ngFor="let title of titles"> {{title}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of details">
+      <td>{{item.payload.name}}</td>
+      <td>{{item.payload.age}}</td>
+      <td>{{item.payload.name}}</td>
+      <td>{{item.payload.submit}}</td>
+    </tr>
+  </tbody>
+</table>
