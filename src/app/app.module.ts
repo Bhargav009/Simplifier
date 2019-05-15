@@ -6,6 +6,8 @@ import { FormioModule } from 'angular-formio';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AgGridModule } from 'ag-grid-angular';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +38,8 @@ import { DetailsComponent } from './details/details.component';
     SocialLoginModule,
     FormioModule,
     FormsModule,
+    GoogleChartsModule.forRoot(),
+    AgGridModule.withComponents([]),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([

@@ -38,6 +38,6 @@ export class SimplyFormComponent {
     let name: string = this.form.name;
     console.log(name);
     this.fDetailsService.save(name.toLowerCase().replace(/\s/g, ''), input.data);
-    this.router.navigate(['/details']);
+    this.router.navigate(['/details/', this.form.key]);
   }
 }
