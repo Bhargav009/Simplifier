@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, SocialUser, GoogleLoginProvider } from 'angularx-social-login';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,29 +8,39 @@ import { AuthService, SocialUser, GoogleLoginProvider } from 'angularx-social-lo
 export class LoginComponent implements OnInit {
 
   isSignUp: boolean = true;
-  user: SocialUser;
+  name: string;
+  email: string;
+  password: any;
+  userCreds: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) {
+   }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      console.log(this.user);
-    })
   }
 
   toggleSignUp(param) {
     this.isSignUp = param;
-    console.log(this.isSignUp);
   }
 
   googleSignIn() {
-    console.log("Hi");
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(user => console.log(user));
+    this.authService.googleSignIn();
   }
 
-  signOut() {
-    this.authService.signOut();
+  gitHubSignIn() {
+    this.authService.gitHubSignIn();
   }
 
+  createUserWithEmailSignIn() {
+    this.authService.createUserWithEmailSignIn(this.email, this.password, this.name);
+    this.email = "";
+    this.password = "";
+    this.name = "";
+  }
+
+  emailSignIn() {
+    this.authService.emailSignIn(this.email, this.password, this.name);
+    this.email = "";
+    this.password = "";
+  }
 }
