@@ -1,8 +1,9 @@
-<div class="simplyContainer">
+<div class="simply-container">
   <h5>Form Name:</h5>
-  <input type="text" name="name" class="form-control" [(ngModel)]="formName" #nameInput placeholder="Enter form name...">
+  <input type="text" name="name" class="form-control" [(ngModel)]="formName" #nameInput
+    placeholder="Enter form name...">
   <div class="builder">
-    <form-builder [form]="form" #json class="null"></form-builder>
+    <form-builder [form]="form" #json></form-builder>
   </div>
   <button class="btn btn-danger m-2 px-4 pull-right" (click)="reset()">Reset</button>
   <button class="btn btn-success m-2 px-4 pull-right" [disabled]="!nameInput.value" (click)="save()">Save</button>

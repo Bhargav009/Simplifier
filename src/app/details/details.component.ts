@@ -27,17 +27,21 @@ export class DetailsComponent implements OnInit {
   chartColDef = new Array;
   chartRowData = new Array;
   selectedNodes;
-  
+  chartType: string;
+
+  isAggregate: boolean = false;
+
   gridApi: GridApi;
   gridColumnApi: ColumnApi;
   showChart = false;
-  showSideBar = true;
+  showSideBar = false;
   title = "Pie Chart";
 
   chartTypes = [
     { title: "Pie Chart", value: "PieChart" },
     { title: "Bar Chart", value: "BarChart" },
     { title: "Column Chart", value: "ColumnChart" },
+    { title: "Line Chart", value: "LineChart" },
   ]
 
   defaultGridColDef = {
@@ -67,7 +71,6 @@ export class DetailsComponent implements OnInit {
     //Generate Row and Column data for ag-grid
     this.detailService.getData(key).subscribe(res => {
       this.gridRowData = res;
-
       this.keys = Object.keys(this.gridRowData[0])
       let req = [];
       for (let i = 0; i < this.keys.length; i++) {
@@ -78,33 +81,61 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  dummyNodes = new Array;
-  onGenerate() {
-    // this.showChart = !this.showChart;
+  getChart() {
+    this.showSideBar = !this.showSideBar;
+    this.chartColDef = [];
     this.chartRowData = [];
+  }
 
+  onGenerate() {
+    this.showChart = true;
+    this.chartRowData = [];
     this.selectedNodes = this.grid.api.getSelectedRows();
-    console.log(this.selectedNodes);
+
+    if(this.chartColDef.includes("count*")) {
+      let index = this.chartColDef.indexOf("count*");
+      this.chartColDef.splice(index, 1);
+    }
 
     let allowed = this.chartColDef;
+    let aggRowData = new Array;
 
-    this.selectedNodes.forEach(element => {
-      let row = new Array;
-      allowed.forEach(item => {
-        row.push(element[item]);
+    if (!this.isAggregate) {
+      this.selectedNodes.forEach(element => {
+        let row = new Array;
+        allowed.forEach(item => {
+          row.push(element[item]);
+        });
+        this.chartRowData.push(row);
       });
-      this.chartRowData.push(row);
-    });
+    } else {
+      this.selectedNodes.forEach(element => {
+        allowed.forEach(item => aggRowData.push(element[item]));
+      });
+      this.chartColDef.push("count*");
+      let aggColDef = Array.from(new Set(aggRowData));
+      this.getAgreChart(aggRowData, aggColDef);
+    }
   }
-  
-
 
   OnReady(params) {
-    console.log(params);
     this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
     this.gridColumnApi = params.columnApi;
   }
 
+  options = {
+    width: 400,
+    height: 300
+  };
+
+  getAgreChart(list, keys) {
+    keys.forEach(element => {
+      let count = list.filter(i => i === element).length;
+      let row = new Array;
+      row.push(element);
+      row.push(count);
+      this.chartRowData.push(row);
+    });
+  }
 
 }

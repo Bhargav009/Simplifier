@@ -5,29 +5,34 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link" (click)="logOut()">Log Out</a>
-    </li>
+  <div class="collapse navbar-collapse">
+    <!-- <img class="profile-picture" *ngIf="auth.user as user" src={{user.payload.photoURL}}> -->
 
-    <ng-template #anonymousUser>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login">Login</a>
+    <ul class="navbar-nav mr-auto">
+      <ng-template #anonymousUser>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ng-template>
+
+      <li *ngIf="auth.user as user; else anonymousUser" ngbDropdown class="nav-item dropdown">
+
+        <a ngbDropdownToggle class="nav-link active" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">{{user.payload.displayName}}</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+          <a ngbDropdownItem class="dropdown-item" routerLink="/builder">Create Form</a>
+          <a ngbDropdownItem class="dropdown-item" routerLink="/all">My Forms</a>
+          <!-- <a ngbDropdownItem class="dropdown-item" routerLink="/">Users</a> -->
+          <a ngbDropdownItem class="dropdown-item" (click)="logOut()">Log Out</a>
+        </div>
       </li>
-    </ng-template>
 
-    <li *ngIf="auth.user as user; else anonymousUser" ngbDropdown class="nav-item dropdown">
-      <a ngbDropdownToggle class="nav-link active" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">{{user.displayName}}</a>
-      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-        <a ngbDropdownItem class="dropdown-item" routerLink="/">Action</a>
-        <a ngbDropdownItem class="dropdown-item" routerLink="/">Another action</a>
-        <a ngbDropdownItem class="dropdown-item" routerLink="/">Something else here</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about">About</a>
+      </li>
+    </ul>
 
-      </div>
-    </li>
-
-  </ul>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>

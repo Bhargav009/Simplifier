@@ -1,7 +1,6 @@
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { FormioModule } from 'angular-formio';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
@@ -16,11 +15,9 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SimplyFormComponent } from './simply-form/simply-form.component';
 import { AllFormsComponent } from './all-forms/all-forms.component';
-import { SimplyChartComponent } from './simply-chart/simply-chart.component';
 import { SimplyFormBuilderComponent } from './simply-form-builder/simply-form-builder.component';
 import { environment } from 'src/environments/environment';
 import { DetailsComponent } from './details/details.component';
-import { AuthService } from './services/auth.service';
 import { ForgotComponent } from './forgot/forgot.component';
 
 @NgModule({
@@ -30,7 +27,6 @@ import { ForgotComponent } from './forgot/forgot.component';
     NavbarComponent,
     SimplyFormComponent,
     AllFormsComponent,
-    SimplyChartComponent,
     SimplyFormBuilderComponent,
     DetailsComponent,
     ForgotComponent

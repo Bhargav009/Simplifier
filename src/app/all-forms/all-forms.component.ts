@@ -9,27 +9,28 @@ import { map } from 'rxjs/operators';
 })
 export class AllFormsComponent {
   forms;
+  userKey;
 
-  constructor(private formService: FormService) {
-    this.forms = formService.getAll().pipe(
-      map(changes => changes.map(
-        c => (
-          {
-            key: c.key,
-            payload: c.payload.val(),
-            prevKey: c.prevKey,
-            type: c.type
-          }))));
+  constructor(
+    private formService: FormService) {
+    try {
+      this.forms = formService.getAll().pipe(
+        map(changes => changes.map(
+          c => (
+            {
+              key: c.key,
+              payload: c.payload.val(),
+              prevKey: c.prevKey,
+              type: c.type
+            }))));
+    } catch (error) {
+    }
   }
 
   remove(data) {
-    if (!confirm("Are you sure to Delete?"))
+    if (!confirm("Are you sure to Delete? All submitted details of form will be deleted permanently."))
       return;
-    console.log(data.payload.key);
     this.formService.remove(data.key, data.payload.key);
   }
-
-
-
 
 }

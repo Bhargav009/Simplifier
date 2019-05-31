@@ -1,12 +1,13 @@
 <div class="row simply-adjust">
   <div class="col-3 p-0" *ngIf="showSideBar">
-    <div class="card" style="width: 100%;">
+    <div class="card" style="width: 100%; height: 100%">
       <div class="card-body">
         <h5 class="card-title">Chart Builder<i class="fas fa-times pull-right" (click)="showSideBar = !showSideBar"></i>
         </h5>
-        <select class="form-control">
-          <option disabled>Chart Type</option>
-          <option *ngFor="let item of chartTypes" value="item.value">{{item.title}}</option>
+        <select class="form-control" [(ngModel)]="chartType" name="chartSelector">
+          <option value="undefined" selected>Select Chart Type</option>
+          <option *ngFor="let item of chartTypes" value={{item.value}}>{{item.title}}
+          </option>
         </select>
         <br>
 
@@ -15,35 +16,37 @@
           <li class="list-group-item" *ngFor="let key of keys">{{key | titlecase}}<input class="pull-right"
               type="checkbox" (change)="generateChartColumnData(key, $event.target.checked)"></li>
         </ul>
+        <br>
+        <input type="checkbox" (change)="isAggregate = $event.target.checked"> Aggregrate Column {{chartColDef[0]}} <br>
 
-        <button class="btn btn-success my-2" (click)="onGenerate()"><i class="fas fa-chart-bar"></i> Generate</button>
-
+        <button class="btn btn-success my-2 pull-right" (click)="onGenerate()"><i class="fas fa-chart-bar"></i>
+          Generate</button>
       </div>
     </div>
   </div>
 
   <div [ngClass]="{'col-5': showSideBar == true,
-                   'col-6': showSideBar == false}">
+                   'col-12': showSideBar === false && showChart === false,
+                   'col-7' : showChart === true && showSideBar === false }">
     <ng-container *ngIf="noKey">
       <h2>No Form is selected</h2>
     </ng-container>
 
-    <ag-grid-angular *ngIf="!noKey" #agGrid style="width: 100%; height: 500px;" [columnDefs]="gridColumnsDef"
+    <ag-grid-angular *ngIf="!noKey" #agGrid style="width: 100%; height: 550px;" [columnDefs]="gridColumnsDef"
       [rowData]="gridRowData" [defaultColDef]="defaultGridColDef" rowSelection="multiple" class="ag-theme-balham"
-      [pagination]=true [enableRangeSelection]="true" (gridReady)="OnReady($event)">
+      [enableRangeSelection]="true" (gridReady)="OnReady($event)">
     </ag-grid-angular>
-
-    <button (click)="getNodes()">Get Nodes</button>
-
-    {{ chartColDef | json}}
-    {{ chartRowData | json }}
+    <button class="btn btn-success px-3 m-2 pull-right" (click)="getChart()">Get Chart</button>
   </div>
 
-  <div [ngClass]="{'col-4': showSideBar == true,
-  'col-6': showSideBar == false}">
-    <p> For charts</p>
-    <button (click)="showChart = !showChart">Toggle</button>
-    <google-chart *ngIf="showChart" [type]="'BarChart'" [data]="chartRowData" [columnNames]="chartColDef" [title]="title">
-    </google-chart>
+  <div class="col-4 p-0" [ngClass]="{'col-5' : showChart === true && showSideBar === false }" *ngIf="showChart">
+    <div class="card" style="width: 100%; padding:0">
+      <div class="card-body" style="width:100%; height:100%">
+        <h5 class="card-title">{{chartType}}<i class="fas fa-times pull-right" (click)="showChart = !showChart"></i>
+        </h5>
+        <google-chart [options]="options" [type]="chartType" [data]="chartRowData"
+          [columnNames]="chartColDef">
+        </google-chart>
+      </div>
+    </div>
   </div>
-</div>

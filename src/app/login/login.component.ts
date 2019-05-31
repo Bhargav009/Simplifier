@@ -7,11 +7,13 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  isSignUp: boolean = true;
+  isSignUp: boolean = false;
   name: string;
   email: string;
   password: any;
   userCreds: any;
+  user: any;
+  signInError: any;
 
   constructor(public authService: AuthService) {
    }
@@ -39,8 +41,13 @@ export class LoginComponent implements OnInit {
   }
 
   emailSignIn() {
-    this.authService.emailSignIn(this.email, this.password, this.name);
+    this.signInError = this.authService.emailSignIn(this.email, this.password, this.name);
+    
     this.email = "";
     this.password = "";
+  }
+
+  facebookSingIn() {
+    alert("Facebook sign in capability currently not implemented. Please use other sign in.");
   }
 }

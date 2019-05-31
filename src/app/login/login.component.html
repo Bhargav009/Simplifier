@@ -3,33 +3,41 @@
     <form action="#">
       <h1>Create Account</h1>
       <div class="social-container">
-        <a href="#" class="social" (click)="googleSignIn()"><i class="fab fa-google-plus-g fa-lg"></i></a>
-        <a href="#" class="social" (click)="gitHubSignIn()"><i class="fab fa-github fa-lg"></i></a>
+        <a routerLink="/" class="social" (click)="googleSignIn()"><i class="fab fa-google-plus-g"></i></a>
+        <a routerLink="/" class="social" (click)="gitHubSignIn()"><i class="fab fa-github"></i></a>
+        <a routerLink="/" class="social" (click)="facebookSingIn()"><i class="fab fa-facebook"></i></a>
       </div>
       <span>or use your email for registration</span>
       <input type="text" name="name" [(ngModel)]="name" placeholder="Name" />
-      {{name | json}}
       <input type="email" name="email" [(ngModel)]="email" placeholder="Email" />
-      {{email | json}}
       <input type="password" name="password" [(ngModel)]="password" placeholder="Password" />
-      {{password | json}}
       <button type="button" (click)="createUserWithEmailSignIn()">Sign Up</button>
     </form>
   </div>
+
   <div class="form-container sign-in-container">
     <form action="#">
       <h1>Sign in</h1>
       <div class="social-container">
-        <a href="#" class="social" (click)="googleSignIn()"><i class="fab fa-google-plus-g fa-lg"></i></a>
-        <a href="#" class="social" (click)="gitHubSignIn()"><i class="fab fa-github fa-lg"></i></a>
+        <a routerLink="/" class="social" (click)="googleSignIn()"><i class="fab fa-google-plus-g"></i></a>
+        <a routerLink="/" class="social" (click)="gitHubSignIn()"><i class="fab fa-github"></i></a>
+        <a routerLink="/" class="social" (click)="facebookSingIn()"><i class="fab fa-facebook"></i></a>
       </div>
       <span>or use your account</span>
       <input type="email" name="email" [(ngModel)]="email" placeholder="Email" />
       <input type="password" name="password" [(ngModel)]="password" placeholder="Password" />
       <a routerLink="/forgot">Forgot your password?</a>
       <button type="button" (click)="emailSignIn()">Sign In</button>
+      <div *ngIf="signInError">
+        <label *ngIf="signInError.__zone_symbol__value.code === 'auth/invalid-email'">Please enter valid email
+          address</label>
+        <label *ngIf="signInError.__zone_symbol__value.code === 'auth/user-not-found'">User not found</label>
+        <label *ngIf="signInError.__zone_symbol__value.code === 'auth/wrong-password'">Username/password are incorrect</label>
+      </div>
+
     </form>
   </div>
+
   <div class="overlay-container">
     <div class="overlay">
       <div class="overlay-panel overlay-left">
@@ -38,13 +46,12 @@
         <button class="ghost" (click)="toggleSignUp(false)">Sign In</button>
       </div>
       <div class="overlay-panel overlay-right">
-        <h1>Hello, Friend!</h1>
-        <p>Enter your personal details and start journey with us</p>
+        <h1>Hey, Buddy!</h1>
+        <p>Enter your personal details and start Simplifier</p>
         <button class="ghost" (click)="toggleSignUp(true)">Sign Up</button>
       </div>
     </div>
   </div>
 </div>
 <!-- {{authService.userCreds | json }} -->
-{{authService.user | json}}
-
+<!-- {{authService.user | json}} -->

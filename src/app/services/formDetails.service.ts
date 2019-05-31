@@ -6,34 +6,26 @@ import { Injectable } from '@angular/core';
 })
 export class FormDetailsService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(
+    private db: AngularFireDatabase,
+  ) { }
 
   save(formName, data) {
-    this.db.list("/FormDetails/"+ formName).push(data);
+    if (!localStorage.getItem("userKey")) return;
+
+    this.db.list(`/FormDetails/${localStorage.getItem("userKey")}/${formName}`).push(data);
   }
 
   remove(key) {
-    this.db.object("/FormDetails/"+ key).remove();
-  }
+    if (!localStorage.getItem("userKey")) return;
 
-  getDetails(formName) {
-    return this.db.list("/FormDetails/"+formName).snapshotChanges();
-  }
-
-  getOneFormDetails(formName) {
-    return this.db.list("/FormDetails/"+formName);
-  }
-
-  getDetailsByKey(formName, key) {
-    return this.db.object("/"+ formName + "/"+ key).valueChanges();
-  }
-
-  getAge() {
-    return this.db.list("/FormDetails/simpleform", ref => ref.orderByChild('age')).valueChanges();
+    this.db.object(`/FormDetails/${localStorage.getItem("userKey")}/${key}`).remove();
   }
 
   getData(key) {
-    return this.db.list("/FormDetails/"+ key, ref => ref.orderByChild('age')).valueChanges();
+    if (!localStorage.getItem("userKey")) return;
+
+    return this.db.list(`/FormDetails/${localStorage.getItem("userKey")}/${key}`).valueChanges();
   }
 
 }

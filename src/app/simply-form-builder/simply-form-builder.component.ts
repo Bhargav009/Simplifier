@@ -1,8 +1,8 @@
+import { AuthService } from './../services/auth.service';
 import { FormService } from './../services/form.service';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilderComponent } from 'angular-formio';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-simply-form-builder',
@@ -13,18 +13,14 @@ export class SimplyFormBuilderComponent {
 
   constructor(
     private formService: FormService,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService) { }
 
   @ViewChild('json') json: FormBuilderComponent;
 
   formName = "";
 
   form = { components: [] };
-
-  Onchange(data) {
-    console.log(data);
-    console.log(this.json);
-  }
 
   save() {
     let formSchema = this.json.form;

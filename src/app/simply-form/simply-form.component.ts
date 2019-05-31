@@ -20,12 +20,11 @@ export class SimplyFormComponent {
     private fDetailsService: FormDetailsService,
     private activeRoute: ActivatedRoute,
     private router: Router
-    ) {
-      this.id = this.activeRoute.snapshot.paramMap.get('key');
-      if(this.id) {
-        console.log(this.id);
-        this.initialize(this.id);
-      }
+  ) {
+    this.id = this.activeRoute.snapshot.paramMap.get('key');
+    if (this.id) {
+      this.initialize(this.id);
+    }
   }
 
   initialize(id) {
@@ -36,7 +35,6 @@ export class SimplyFormComponent {
 
   onSubmit(input) {
     let name: string = this.form.name;
-    console.log(name);
     this.fDetailsService.save(name.toLowerCase().replace(/\s/g, ''), input.data);
     this.router.navigate(['/details/', this.form.key]);
   }

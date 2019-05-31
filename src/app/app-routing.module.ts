@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import { ForgotComponent } from './forgot/forgot.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,31 +10,34 @@ import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   {
-    path: '', component: LoginComponent
+    path: '', component: AllFormsComponent, canActivate: [AuthGuardService]
   },
   {
     path: 'login', component: LoginComponent
   },
   {
-    path: 'forgot', component: ForgotComponent
+    path: 'about', component: ForgotComponent
   },
   {
-    path: 'builder', component: SimplyFormBuilderComponent
+    path: 'builder', component: SimplyFormBuilderComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'all', component: AllFormsComponent
+    path: 'all', component: AllFormsComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'form', component: SimplyFormComponent
+    path: 'all/:userKey', component: AllFormsComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'form/:key', component: SimplyFormComponent
+    path: 'form', component: SimplyFormComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'details', component: DetailsComponent
+    path: 'form/:key', component: SimplyFormComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'details/:key', component: DetailsComponent
+    path: 'details', component: DetailsComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'details/:key', component: DetailsComponent, canActivate: [AuthGuardService]
   }
 ];
 
