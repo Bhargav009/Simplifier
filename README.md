@@ -2,6 +2,12 @@
 
 ![App Demo](Demo.gif)
 
+Simplifier features:
+1. Supports custom form creation (Dynamic forms).
+2. Supports Google, GitHub and Email Logins.
+3. Clean and elegant data grid.
+4. Analytics of submitted data with Charts.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
 ## Development server
