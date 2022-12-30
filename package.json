@@ -23,7 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.1.3",
     "ag-grid-angular": "^20.2.0",
     "ag-grid-community": "^20.2.0",
-    "angular-formio": "^3.16.0",
+    "angular-formio": "^4.11.5",
     "angular-google-charts": "^0.1.3",
     "angular2-multiselect-dropdown": "^4.2.2",
     "bootstrap": "^4.3.1",
